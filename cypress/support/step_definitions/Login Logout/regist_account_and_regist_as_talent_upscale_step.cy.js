@@ -3,6 +3,22 @@ import 'cypress-xpath'
 
 const { Given, When, Then } = require('@badeball/cypress-cucumber-preprocessor');
 
+// Mendapatkan tanggal saat ini
+const currentDate = new Date();
+
+// Mendapatkan tahun, bulan, dan tanggal dari tanggal saat ini
+const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth() + 1; // Ingat: Januari dimulai dari 0
+const currentDay = currentDate.getDate();
+
+// Looping untuk mendapatkan tanggal acak dalam 1 tahun terakhir
+const randomYear = currentYear - 1; // Mengambil tahun terakhir
+const randomMonth = Math.floor(Math.random() * 12) + 1; // Bulan antara 1 dan 12
+const randomDay = Math.floor(Math.random() * 28) + 1; // Tanggal antara 1 dan 28 (asumsi bulan Februari)
+
+// Format tanggal dalam bentuk string
+const randomDate = `${randomYear}-${randomMonth.toString().padStart(2, '0')}-${randomDay.toString().padStart(2, '0')}`;
+
 Given('I open website upscale#1.7',()=>{
     cy.clearCookies();
     cy.visit('https://upscale.edudev.xyz/')
@@ -90,47 +106,53 @@ When('I continue Fill Regist as Talent Form upscale#1.7',()=>{
     cy.xpath("//input[@name='talent_address']").type('Las Vegas')  
     cy.xpath("//input[@name='tempat_lahir']").type("Texas")
 
-    function year_date() {
-        var year_text = "";
-        var year_possible = "1234567890";
-      
-        for (var i = 0; i < 3; i++)
-            year_text += year_possible.charAt(Math.floor(Math.random() * year_possible.length));
-      
-        return year_text;
-    }
-
-    function month_date() {
-        var month_text = "";
-        var month_possible = "1234567890";
-      
-        for (var i = 0; i < 1; i++)
-            month_text += month_possible.charAt(Math.floor(Math.random() * month_possible.length));
-      
-        return month_text<12;
-    }
-
-    function day_date() {
-        var day_text = "";
-        var day_possible = "1234567890";
-      
-        for (var i = 0; i < 1; i++)
-            day_text += day_possible.charAt(Math.floor(Math.random() * day_possible.length));
-      
-        return day_text<12;
-    }
-
-
-    cy.xpath("//input[@id='tgl_lahir']").type(year_date()+'-'+month_date()+'-'+day_date())
-
-    cy.xpath("//select[@name='gender']").select('Laki-laki')
-
     
-    
-})
+
+    // Gunakan randomDate untuk mengisi input
+    cy.xpath("//input[@id='tgl_lahir']").type(randomDate);
+
+
+
+    // cy.xpath("//input[@id='tgl_lahir']").type(year_date()+'-'+month_date()+'-'+day_date())
+    const randomGender = Math.random() < 0.5 ? 'Laki-laki' : 'Perempuan';
+    cy.xpath("//select[@name='gender']").select(randomGender);
+    cy.xpath("//a[contains(.,'Lanjutkan Daftar')]").click()
+
+
+    // cy.xpath("//select[@name='gender']").select('Laki-laki')
+
+        
+        
+    })
  
 Then('I click Lanjutkan Daftar Button upscale#1.7',()=>{
-    cy.xpath("//a[contains(.,'Lanjutkan Daftar')]").click() 
+    // cy.xpath("//a[contains(.,'Lanjutkan Daftar')]").click() 
+
+    const workingExperience = Math.random() < 0.5 ? 'sudah' : 'belum';
+
+    // Select option in the first dropdown
+    cy.xpath("//select[@id='pengalaman_option']").select(workingExperience);
+
+    if (workingExperience === 'sudah') {
+        cy.xpath("//input[@id='start_career']").type(randomDate)
+
+        const options = ['Junior', 'Middle', 'Senior'];
+        const randomIndex = Math.floor(Math.random() * options.length);
+        const selectedOption = options[randomIndex];
+        cy.xpath("//select[@name='talent_level']").select(selectedOption);
+
+        cy.xpath("//select[@name='talent_focus']").select(0)
+
+    }
+    
+    else if (workingExperience === 'belum') {
+        const edu_options = ['yes','no'];
+        const edu_randomIndex = Math.floor(Math.random() * edu_options.length);
+        const edu_selectedOption = edu_options[edu_randomIndex];
+        cy.xpath("//select[@name='talent_isa']").select(edu_selectedOption)
+    }
+
+
   })
 
 
