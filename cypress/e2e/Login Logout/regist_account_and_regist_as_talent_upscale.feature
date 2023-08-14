@@ -7,4 +7,5 @@ Feature: Regist Account and Regist As Talent in Upscale
         When I click hyperlink registration upscale#1.7
         When I Fill Registration Form upscale#1.7
         When I continue Fill Regist as Talent Form upscale#1.7
-        Then I click Lanjutkan Daftar Button upscale#1.7
+        When I Fill The Working Experience Field upscale#1.7
+        Then I Fill Web Development Experience Field upscale#1.7
