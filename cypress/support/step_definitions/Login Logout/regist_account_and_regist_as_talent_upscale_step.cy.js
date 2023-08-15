@@ -110,22 +110,26 @@ When('I Fill The Working Experience Field upscale#1.7',()=>{
 
 })
 
-Then('I Fill Web Development Experience Field upscale#1.7',()=>{
+const skilldev = Math.random() < 0.5 ? 'ya' : 'tidak';
+const yes_no_option = Math.random() < 0.5 ? 'yes' : 'no';
+const ya_belum_option= Math.random() < 0.5 ? 'ya' : 'belum';
 
-    const webdev = Math.random() < 0.5 ? 'ya' : 'tidak';
-    cy.xpath("//select[@id='web_option']").select('ya')
 
-    if (webdev == 'ya' ) {
+When('I Fill Web Development Experience Field upscale#1.7',()=>{
+
+
+    cy.xpath("//select[@id='web_option']").select(skilldev)
+    if (skilldev == 'ya' ) {
         
-        cy.xpath("//div[@class='fstElement fstMultipleMode fstResultsOpened fstActive']/div[@class='fstControls']").click()
-        cy.xpath("//span[@class='fstResultItem fstSelected']").click()
-        cy.get('span:nth-of-type(5)').click()
-        cy.xpath("//span[.='PHP']").click()
+        cy.xpath("//div[@class='fstElement fstMultipleMode fstNoneSelected fstActive fstResultsOpened']//input[@class='fstQueryInput fstQueryInputExpanded']").click()
+
+
         cy.xpath("//span[.='Ruby']").click()
-        cy.xpath("//span[.='Yii']").click()
-        cy.pause()
-        
-        // cy.get('span:nth-of-type(14)').click()
+        cy.xpath("//span[.='PHP']").click()
+        cy.xpath("//span[.='Codeigniter - CI']").click()
+        cy.contains('Apakah anda memiliki kemampuan Web Development?').click()
+        // cy.pause()
+
         
         cy.xpath("//a[contains(.,'Selanjutnya')]").click()
 
@@ -137,4 +141,130 @@ Then('I Fill Web Development Experience Field upscale#1.7',()=>{
 
 })
 
+When('I Fill Mobile Development Experience Field upscale#1.7',()=>{
+    cy.xpath("//select[@id='mobile_option']").select(skilldev)
+    if (skilldev == 'ya' ) {
+        
+        // cy.xpath("//div[@class='fstElement fstMultipleMode fstNoneSelected fstResultsOpened fstActive']//input[@class='fstQueryInput fstQueryInputExpanded']").click()
+        cy.xpath("//span[.='Swift']").click()
+        cy.xpath("//span[.='Android Native']").click()
+        cy.xpath("//span[.='Unity']").click()
+        cy.contains('Apakah anda memiliki Skill Mobile Development?').click()
+        cy.xpath("//a[contains(.,'Selanjutnya')]").click()
 
+    }
+
+    else{
+        cy.xpath("//a[contains(.,'Selanjutnya')]").click()
+    }
+
+})
+
+When('I Fill Dekstop Development Experience Field upscale#1.7',()=>{
+    cy.xpath("//select[@id='desktop_option']").select(skilldev)
+    cy.xpath("//a[contains(.,'Selanjutnya')]").click()  
+})
+
+When('I Fill Managerial Experience Field upscale#1.7',()=>{
+    cy.xpath("//select[@id='management_option']").select(skilldev)
+    cy.xpath("//a[contains(.,'Selanjutnya')]").click()
+})
+
+When('I Fill Other Experience Field upscale#1.7',()=>{
+    cy.xpath("//select[@id='other_option']").select(skilldev)
+    cy.xpath("//a[contains(.,'Selanjutnya')]").click()  
+})
+
+When('I Fill Oportunity Job Vacancy Field upscale#1.7',()=>{
+    cy.xpath("//input[@name='fulltime_rate']").type('5000000')
+
+    const career_status = ['yes', 'no', '1_month'];
+    const careerIndex = Math.floor(Math.random() * career_status.length);
+    const selectedcarrer = career_status[careerIndex];
+    cy.xpath("//select[@id='av']").select(selectedcarrer)
+    cy.xpath("//button[@class='ui-datepicker-trigger']").click()
+    cy.xpath("//a[.='14']").click()
+    cy.xpath("//select[@id='luar_kota_option']").select(yes_no_option)
+    cy.xpath("//select[@name='talent_remote']").select(yes_no_option)
+    cy.xpath("//a[contains(.,'Selanjutnya')]").click()
+})
+
+When('I Fill Frelance Project Field upscale#1.7',()=>{
+    cy.xpath("//select[@id='freelance_option']").select(skilldev)
+    cy.xpath("//select[@id='project_option']").select(skilldev)
+    cy.xpath("//a[contains(.,'Selanjutnya')]").click()
+})
+
+When('I Fill Mentor Oportunity Field upscale#1.7',()=>{
+  cy.xpath("//select[@id='ngajar_option']").select(ya_belum_option)
+
+    if (ya_belum_option == 'ya' ) {
+        
+        cy.xpath("//input[@name='ngajar_rate']").type('25000')
+        cy.xpath("//a[contains(.,'Selanjutnya')]").click()
+
+    }
+
+    else{
+        cy.xpath("//a[contains(.,'Selanjutnya')]").click()
+    }
+
+})
+
+const international_career = [
+    'ya',
+    'Tidak yakin, bahasa inggris saya tidak cukup baik',
+    'Tidak, karena perbedaan budaya kerja',
+    'Tidak, karna suatu hal'
+];
+const international_career_Index = Math.floor(Math.random() * international_career.length);
+const selectedinternationalcarrer = international_career[international_career_Index];
+
+When('I Fill Remote International Career Oportunity Field upscale#1.7',()=>{
+
+    cy.xpath("//select[@name='talent_international']").select(selectedinternationalcarrer)
+    cy.xpath("//a[contains(.,'Selanjutnya')]").click()
+
+})
+
+When('I Fill Onsite International Career Oportunity Field upscale#1.7',()=>{
+
+    cy.xpath("//select[@name='overseas_onsite']").select(selectedinternationalcarrer)
+    cy.xpath("//a[contains(.,'Selanjutnya')]").click()
+
+})
+
+When('I Fill Select Job Vacancy Field upscale#1.7',()=>{
+
+    cy.xpath('//select[@id="job_vacancy_opt"]').then((selectElement) => {
+        const options = [];
+
+        selectElement.find('option').each((index, option) => {
+            options.push(option.value);
+        })
+        const randomIndex = Math.floor(Math.random() * options.length);
+        const selectedOption = options[randomIndex];
+
+        cy.xpath('//select[@id="job_vacancy_opt"]').select(selectedOption)
+        
+    })
+
+    cy.xpath("//a[contains(.,'Selanjutnya')]").click()
+
+})
+
+When('I checked All form upscale#1.7',()=>{
+
+    
+
+    cy.xpath("//a[contains(.,'Kirim Form Pendaftaran?')]").click()
+
+})
+
+Then('I Validation, I Sucess Registration upscale#1.7',()=>{
+
+    
+
+    cy.contains('Berhasil Mendaftar!').should('be.visible')
+
+})
