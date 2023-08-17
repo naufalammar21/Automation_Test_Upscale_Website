@@ -22,8 +22,20 @@ When('I Start Request join as talent  upscale#8',()=>{
         return true
     })
 
-    cy.xpath("//div[@id='register_main']//input[@name='username']").type('Ed Sheeran')
-    cy.xpath("//div[@id='register_main']//input[@id='Email']").type('edsheeran@gmail.com')
+    cy.xpath("//div[@id='register_main']//input[@name='username']").type(userID_Alpha())
+
+    function userID_Alpha() {
+        var text = "";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    
+        for (var i = 0; i < 10; i++)
+          text += possible.charAt(Math.floor(Math.random() * possible.length));
+    
+        return text;
+    }
+
+    cy.xpath("//div[@id='register_main']//input[@name='username']").type(userID_Alpha())
+    cy.xpath("//div[@id='register_main']//input[@id='Email']").type(userID_Alpha()+'@yahoo.com')
     cy.xpath("//div[@id='register_main']//input[@name='password']").type('shape of you')
     cy.xpath("//div[@id='register_main']//input[@name='password_confirmation']").type('shape of you')
     cy.xpath("//select[@id='country_code']").select('Indonesia (+62)')
