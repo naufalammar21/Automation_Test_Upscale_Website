@@ -196,36 +196,19 @@ When('I Fill Frelance Project Field upscale#1.7',()=>{
 })
 
 When('I Fill Mentor Oportunity Field upscale#1.7',()=>{
-    // cy.xpath("//select[@id='ngajar_option']").then((selectElement) => {
-    //     const options = [];
+    
+        const index = Math.floor(Math.random() * 3);
+        cy.xpath("//select[@id='ngajar_option']").select(index);
 
-    //     selectElement.find('option').each((index, option) => {
-    //         options.push(option.value);
-    //     })
-    //     const randomIndex = Math.floor(Math.random() * options.length);
-    //     const selectedOption = options[randomIndex];
+        if (index === 0) {
+    
+            cy.xpath("//input[@name='ngajar_rate']").type('25000', { force: true });
 
-    //     cy.xpath("//select[@id='ngajar_option']").select(selectedOption)
-        
-    // })
+        }
+        cy.xpath("//a[contains(.,'Selanjutnya')]").click();
 
 
-  cy.xpath("//select[@id='ngajar_option']").select(ya_belum_option)
-//   cy.xpath("//a[contains(.,'Selanjutnya')]").click()
-
-    if (ya_belum_option == 'ya' ) {
-
-               
-        cy.xpath("//input[@name='ngajar_rate']").type('25000')
-        cy.xpath("//a[contains(.,'Selanjutnya')]").click()
-
-    }
-
-    else{
-        cy.xpath("//a[contains(.,'Selanjutnya')]").click()
-    }
-
-})
+    })
 
 const international_career = [
     'ya',
