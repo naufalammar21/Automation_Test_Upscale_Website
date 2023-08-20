@@ -42,39 +42,7 @@ When('I Start Request join Comunity upscale#6',()=>{
 
     cy.xpath("//a[.='For Talent']").click()
     cy.xpath("//div[@class='col-lg-4 align-right align-left-md fade-in']/a[contains(.,'Join Community')]").click()
-    // cy.xpath("//div[@id='register_main']//input[@name='username']").type(userID_Alpha())
 
-    // function userID_Alpha() {
-    //     var text = "";
-    //     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    
-    //     for (var i = 0; i < 10; i++)
-    //       text += possible.charAt(Math.floor(Math.random() * possible.length));
-    
-    //     return text;
-    //   }
-
-    // cy.xpath("//div[@id='register_main']//input[@id='Email']").type(email_Alpha()+'@gmail.com')
-
-    
-
-    // function email_Alpha() {
-    //     var email_text = "";
-    //     var email_possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-    
-    //     for (var i = 0; i < 10; i++)
-    //       email_text += email_possible.charAt(Math.floor(Math.random() * email_possible.length));
-    
-    //     return email_text;
-    //   }
-
-
-    // cy.xpath("//div[@id='register_main']//input[@name='password']").type('shape of you')
-    // cy.xpath("//div[@id='register_main']//input[@name='password_confirmation']").type('shape of you')
-    // cy.xpath("//select[@id='country_code']").select('Indonesia (+62)')
-    // cy.xpath("//div[@id='register_main']//input[@id='Number']").type('081477898675')
-    // cy.xpath("//input[@id='refrensi']").type('Facebook')
-    // cy.xpath("//a[contains(.,'DAFTAR')]").click()
     
 })
 
